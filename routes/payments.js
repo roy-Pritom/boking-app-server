@@ -15,5 +15,21 @@ router.post('/',async(req,res)=>{
     }
 })
 
+router.get('/',async(req,res)=>{
+ 
+
+    try{
+     
+  const bookItems=await payment.find();
+
+    res.status(200).json(bookItems)
+    }
+    catch(err){
+    res.status(500).json(err)
+
+
+    }
+})
+
 
 export default router;

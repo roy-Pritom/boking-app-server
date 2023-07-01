@@ -61,7 +61,7 @@ router.get('/find/:id',async(req,res)=>{
 router.get('/',async(req,res)=>{
 const {min,max,...others}=req.query;
     try{
-  const Hotels=await hotel.find({...others,cheapestPrice:{$gt: min || 1,$lt: max || 1000}}).limit(req.query.limit)
+  const Hotels=await hotel.find({...others,cheapestPrice:{$gt: min || 1,$lt: max || 1000}})
     res.status(200).json(Hotels)
     }
     catch(err){
@@ -70,6 +70,8 @@ const {min,max,...others}=req.query;
 
     }
 })
+
+
 
 
 router.get("/countByCity",async(req,res,next)=>{
@@ -86,6 +88,18 @@ router.get("/countByCity",async(req,res,next)=>{
   }
 });
 
+router.get("/byCity",async(req,res,next)=>{
+  const city = req.query.city;
+  const filter={type:city}
+  try{
+    const Hotels=await hotel.find(filter)
+      res.status(200).json(Hotels)
+      }
+  catch (err) {
+    next(err);
+  }
+});
+
 
 router.get("/countByType", async(req,res,next)=>{
   try {
@@ -96,11 +110,11 @@ router.get("/countByType", async(req,res,next)=>{
     const cabinCount = await hotel.countDocuments({ type: "Cabin" });
 
     res.status(200).json([
-      { type: "Hotels", count: hotelCount },
-      { type: "Apartments", count: apartmentCount },
-      { type: "Resorts", count: resortCount },
-      { type: "Villas", count: villaCount },
-      { type: "Cabins", count: cabinCount },
+      { type: "Hotel", count: hotelCount },
+      { type: "Apartment", count: apartmentCount },
+      { type: "Resort", count: resortCount },
+      { type: "Villa", count: villaCount },
+      { type: "Cabin", count: cabinCount },
     ]);
   } catch (err) {
     next(err);

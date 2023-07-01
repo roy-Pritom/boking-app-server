@@ -20,6 +20,10 @@ const PaymentSchema = new mongoose.Schema(
         address: {
             type: String,
             required: true,
+        },
+        propertyId: {
+            type: String
+   
         }
 
     }
