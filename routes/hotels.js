@@ -123,7 +123,7 @@ router.get("/countByType", async(req,res,next)=>{
 router.get("/room/:id", async(req,res,next)=>{
   try {
     const Hotel = await hotel.findById(req.params.id);
-    console.log(Hotel);
+    // console.log(Hotel);
     const list = await Promise.all(
       Hotel?.rooms.map((r) => {
         return room.findById(r);

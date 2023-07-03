@@ -7,6 +7,7 @@ import hotelsRoute from './routes/hotels.js'
 import roomsRoute from './routes/rooms.js'
 import paymentsRoute from './routes/payments.js'
 import usersRoute from './routes/users.js'
+import citiesRoute from './routes/cities.js'
 // const cors=require('cors')
 const app = express()
 const port = process.env.PORT || 3000;
@@ -22,6 +23,7 @@ app.use('/api/hotels',hotelsRoute);
 app.use('/api/rooms',roomsRoute);
 app.use('/api/payments',paymentsRoute);
 app.use('/api/users',usersRoute);
+app.use('/api/cities',citiesRoute);
 
 
 app.use((err, req, res, next) => {
